@@ -199,7 +199,7 @@ def copy_state_dict(
         if exclude_predfix is not None and name.startswith(exclude_predfix):
             continue
         else:
-            assert name in glob, name
+            assert name in glob, f"name {name} global keys {glob.keys()}"
         global_tensor = glob[name]
         if isinstance(global_tensor, ShardedTensor):
             global_tensor = global_tensor.local_shards()[0].tensor
